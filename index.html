@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gus Tattoo — Lugo</title>
+  <meta name="description" content="Gus Tattoo — Estudio de tatuajes profesional en Lugo, Galicia. Neotradicional, Blackwork, Realismo y Fineline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg-0:      #070707;
+      --bg-1:      #0f0f0f;
+      --bg-2:      #161616;
+      --bg-card:   #1a1a1a;
+      --accent:    #c0392b;
+      --accent-2:  #e74c3c;
+      --gold:      #c9a84c;
+      --text-1:    #f0ece6;
+      --text-2:    #9a9590;
+      --text-3:    #5a5550;
+      --border:    #252525;
+      --gap: clamp(1rem, 4vw, 2rem);
+      --col-w: 130px;
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-0);
+      color: var(--text-1);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    @media (min-width: 1340px) {
+      body { padding-left: var(--col-w); padding-right: var(--col-w); }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TATTOO SIDE COLUMNS
+    ══════════════════════════════════════════════════════ */
+    .tattoo-col {
+      display: none;
+      position: fixed;
+      top: 0; bottom: 0;
+      width: var(--col-w);
+      overflow: hidden;
+      z-index: 4;
+      pointer-events: none;
+    }
+    @media (min-width: 1340px) { .tattoo-col { display: block; } }
+    .tattoo-col-left  { left: 0; }
+    .tattoo-col-right { right: 0; }
+    .tattoo-col::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(7,7,7,.72) 0%,
+        rgba(7,7,7,.38) 60%,
+        rgba(7,7,7,.72) 100%
+      );
+      z-index: 1;
+    }
+    .tattoo-col-left::after  { background: linear-gradient(to right,  rgba(7,7,7,.82),rgba(7,7,7,.35)); }
+    .tattoo-col-right::after { background: linear-gradient(to left,   rgba(7,7,7,.82),rgba(7,7,7,.35)); }
+    .tattoo-col::before {
+      content: '';
+      position: absolute; left: 0; right: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .tattoo-col-left::before, .tattoo-col-right::before {
+      top: 0; height: 120px;
+      background: linear-gradient(to bottom, var(--bg-0), transparent);
+    }
+    .col-fade-bottom {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 120px; z-index: 2;
+      background: linear-gradient(to top, var(--bg-0), transparent);
+      pointer-events: none;
+    }
+    .col-track {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .col-track img {
+      width: var(--col-w); height: 170px;
+      object-fit: cover; flex-shrink: 0; display: block;
+    }
+    .col-track-a { animation: colUp 50s linear infinite; }
+    .col-track-b { animation: colDown 42s linear infinite; }
+    @keyframes colUp {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    @keyframes colDown {
+      0%   { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       HERO VIDEO
+    ══════════════════════════════════════════════════════ */
+    .hero-video-wrap {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .hero-video-wrap video {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: .55;
+    }
+    .hero-video-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 55% 40%, rgba(192,57,43,.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 80% at 10% 90%, rgba(192,57,43,.10) 0%, transparent 60%),
+        var(--bg-0);
+      animation: heroPulse 6s ease-in-out infinite alternate;
+    }
+    @keyframes heroPulse {
+      0%   { opacity: 1; }
+      100% { opacity: .7; }
+    }
+    .hero-video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(7,7,7,.45) 0%,
+        rgba(7,7,7,.3)  50%,
+        rgba(7,7,7,.75) 100%
+      );
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TRUST BAR
+    ══════════════════════════════════════════════════════ */
+    .trust-bar {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      justify-content: center; margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .trust-bar-item {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(240,236,230,.55);
+    }
+    .trust-bar-item svg { flex-shrink: 0; opacity: .7; }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── UTILS ──────────────────────────────────────────── */
+    .container { width: min(1160px, 100% - 2 * var(--gap)); margin-inline: auto; }
+    .section-label {
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .75rem;
+    }
+    .heading-xl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: .92; letter-spacing: .02em;
+    }
+    .heading-lg {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1; letter-spacing: .03em;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 1.75rem; font-size: .8rem; font-weight: 600;
+      letter-spacing: .13em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: transform .2s, background .2s, color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-outline {
+      background: transparent; color: var(--text-1);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 1.25rem; }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .6s, transform .6s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ══════════════════════════════════════════════════════
+       TOP NAV
+    ══════════════════════════════════════════════════════ */
+    .topnav {
+      width: 100%;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+    }
+    .topnav-inner {
+      width: min(1160px, 100% - 2 * var(--gap));
+      margin-inline: auto;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .topnav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: .08em;
+      flex-shrink: 0;
+    }
+    .topnav-logo span { color: var(--accent); }
+    .topnav-links { display: none; }
+    @media (min-width: 768px) {
+      .topnav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+    .topnav-links a {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      transition: color .2s;
+      white-space: nowrap;
+    }
+    .topnav-links a:hover { color: var(--text-1); }
+    .topnav-right {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-shrink: 0;
+    }
+    .topnav-cta { display: none; }
+    @media (min-width: 768px) {
+      .topnav-cta {
+        display: inline-flex;
+        padding: .52rem 1.2rem;
+        font-size: .7rem;
+        letter-spacing: .13em;
+      }
+    }
+    .hamburger {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-1); transition: all .3s;
+    }
+    @media (min-width: 768px) { .hamburger { display: none; } }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--bg-0); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      font-size: 2rem; cursor: pointer; color: var(--text-2);
+      background: none; border: none;
+    }
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem; letter-spacing: .06em;
+      color: var(--text-2); transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--text-1); }
+    .mobile-menu .mm-cta { font-size: 1rem; padding: .85rem 2rem; }
+
+    /* ══════════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      padding: 6rem var(--gap) 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(192,57,43,.16) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 15% 80%, rgba(192,57,43,.07) 0%, transparent 60%),
+        var(--bg-0);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 860px; text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .75rem;
+      font-size: .7rem; font-weight: 600;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; width: 28px; height: 1px; background: var(--text-3);
+    }
+    .hero-headline .line-accent { color: var(--accent); display: block; }
+    .hero-sub {
+      margin: 1.5rem auto 0;
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--text-2); max-width: 520px;
+      font-style: italic; font-family: 'Playfair Display', serif;
+      line-height: 1.75;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center; margin-top: 2.25rem;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: var(--text-3); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      animation: bounce 2.2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      55% { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════════════════ */
+    .about-strip {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem var(--gap);
+    }
+    .about-grid { display: grid; gap: 3rem; }
+    @media (min-width: 768px) {
+      .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-placeholder {
+      aspect-ratio: 4/3; overflow: hidden;
+      background: var(--bg-2); border: 1px solid var(--border);
+    }
+    .about-img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+    .about-badge {
+      position: absolute; bottom: -1rem; right: -1rem;
+      width: 86px; height: 86px; background: var(--accent); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; line-height: 1; color: #fff;
+    }
+    .about-badge small { font-size: .52rem; letter-spacing: .15em; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+    .about-text p { color: var(--text-2); margin-bottom: 1.25rem; line-height: 1.75; }
+    .about-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: .7rem; }
+    .about-list li {
+      display: flex; align-items: flex-start; gap: .75rem;
+      font-size: .9rem; color: var(--text-2);
+    }
+    .about-list li::before { content: '—'; color: var(--accent); flex-shrink: 0; }
+
+    /* ══════════════════════════════════════════════════════
+       GALLERY
+    ══════════════════════════════════════════════════════ */
+    .gallery-section { padding: 5.5rem var(--gap); background: var(--bg-0); }
+    .section-header { text-align: center; margin-bottom: 2.5rem; }
+    .section-header .divider { margin-inline: auto; }
+    .gallery-filters {
+      display: flex; flex-wrap: wrap; gap: .4rem;
+      justify-content: center; margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: .4rem 1.1rem; font-size: .7rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-2); cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+    @media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+    .gallery-item {
+      aspect-ratio: 1; background: #111;
+      overflow: hidden; position: relative; cursor: pointer;
+    }
+    .gallery-item img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .45s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(192,57,43,0);
+      display: flex; align-items: flex-end; padding: .85rem;
+      transition: background .3s;
+    }
+    .gallery-item:hover .gallery-overlay { background: rgba(192,57,43,.72); }
+    .gallery-tag {
+      font-size: .68rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: #fff; opacity: 0; transform: translateY(6px);
+      transition: all .25s .04s;
+    }
+    .gallery-item:hover .gallery-tag { opacity: 1; transform: translateY(0); }
+    .gallery-cta { text-align: center; margin-top: 2rem; }
+
+    /* ══════════════════════════════════════════════════════
+       ARTISTS
+    ══════════════════════════════════════════════════════ */
+    .artists-section {
+      padding: 5.5rem var(--gap);
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+    }
+    .artists-grid { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+    @media (min-width: 600px) { .artists-grid { grid-template-columns: repeat(2, 1fr); } }
+    .artist-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      overflow: hidden; transition: border-color .3s, transform .3s;
+    }
+    .artist-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .artist-photo {
+      aspect-ratio: 3/4; background: #111;
+      position: relative; overflow: hidden;
+    }
+    .artist-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .artist-card:hover .artist-photo img { transform: scale(1.04); }
+    .artist-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(7,7,7,.95) 100%);
+    }
+    .artist-avatar-badge {
+      position: absolute; bottom: 1rem; left: 1rem; z-index: 2;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .artist-avatar-img {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 2px solid var(--accent); object-fit: cover;
+      flex-shrink: 0;
+    }
+    .artist-handle {
+      font-size: .65rem; font-weight: 600; letter-spacing: .12em;
+      color: rgba(255,255,255,.7); text-transform: lowercase;
+    }
+    .artist-info { padding: 1.5rem; }
+    .artist-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem; letter-spacing: .04em; margin-bottom: .2rem;
+    }
+    .artist-specialty {
+      font-size: .7rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .75rem;
+    }
+    .artist-bio { font-size: .87rem; color: var(--text-2); line-height: 1.65; }
+    .artist-stats {
+      display: flex; gap: 1.5rem; margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .artist-stat { display: flex; flex-direction: column; gap: .15rem; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+      color: var(--gold); line-height: 1;
+    }
+    .stat-label { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+    .artist-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .85rem; }
+    .artist-tag {
+      font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      padding: .28rem .65rem; border: 1px solid var(--border); color: var(--text-3);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       PROCESS
+    ══════════════════════════════════════════════════════ */
+    .process-section { padding: 5.5rem var(--gap); background: var(--bg-0); }
+    .process-steps {
+      display: grid; gap: 2rem; margin-top: 2.5rem;
+      counter-reset: step;
+    }
+    @media (min-width: 768px) { .process-steps { grid-template-columns: repeat(4, 1fr); } }
+    .process-step {
+      padding-left: 1rem; border-left: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      display: block; font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--border); line-height: 1; margin-bottom: .6rem;
+    }
+    .process-step-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem;
+      letter-spacing: .04em; margin-bottom: .45rem;
+    }
+    .process-step-text { font-size: .85rem; color: var(--text-2); line-height: 1.65; }
+
+    /* ══════════════════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════════════════ */
+    .testimonials-section {
+      padding: 5.5rem var(--gap);
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .testimonials-grid { display: grid; gap: 1.25rem; margin-top: 2.5rem; }
+    @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 1.75rem; position: relative;
+    }
+    .testimonial-card::before {
+      content: '"'; position: absolute; top: .75rem; right: 1.25rem;
+      font-family: 'Playfair Display', serif; font-size: 4.5rem;
+      line-height: 1; color: var(--accent); opacity: .15;
+    }
+    .testimonial-stars { display: flex; gap: .15rem; margin-bottom: .85rem; color: var(--gold); font-size: .85rem; }
+    .testimonial-text {
+      font-size: .88rem; color: var(--text-2); line-height: 1.7;
+      font-style: italic; font-family: 'Playfair Display', serif; margin-bottom: 1.25rem;
+    }
+    .testimonial-author { font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
+    .testimonial-author span { display: block; color: var(--text-3); font-weight: 400; letter-spacing: .08em; margin-top: .2rem; }
+
+    /* ══════════════════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════════════════ */
+    .contact-section { padding: 5.5rem var(--gap); background: var(--bg-0); }
+    .contact-grid { display: grid; gap: 3rem; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1.2fr; align-items: start; } }
+    .contact-info p { color: var(--text-2); margin-bottom: 2rem; line-height: 1.75; }
+    .contact-details { display: flex; flex-direction: column; gap: 1.1rem; }
+    .contact-detail { display: flex; align-items: flex-start; gap: .9rem; }
+    .detail-icon {
+      width: 40px; height: 40px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: grid; place-items: center; flex-shrink: 0; font-size: .9rem;
+    }
+    .detail-text strong {
+      display: block; font-size: .68rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: .18rem;
+    }
+    .detail-text span { font-size: .88rem; color: var(--text-2); }
+    .contact-form {
+      background: var(--bg-card); border: 1px solid var(--border); padding: 2.25rem;
+    }
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem;
+      letter-spacing: .04em; margin-bottom: 1.5rem;
+    }
+    .form-row { display: grid; gap: 1rem; }
+    @media (min-width: 500px) { .form-row { grid-template-columns: 1fr 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: .45rem; margin-bottom: .9rem; }
+    .form-group label {
+      font-size: .68rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--text-2);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--bg-2); border: 1px solid var(--border);
+      color: var(--text-1); padding: .8rem .95rem;
+      font-family: 'Inter', sans-serif; font-size: .88rem;
+      width: 100%; outline: none; transition: border-color .2s;
+    }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-3); }
+    .form-submit { width: 100%; padding: .95rem; margin-top: .4rem; }
+    .form-note { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: .85rem; }
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════ */
+    footer {
+      background: var(--bg-1); border-top: 1px solid var(--border);
+      padding: 3rem var(--gap) 2rem;
+    }
+    .footer-top { display: grid; gap: 2rem; margin-bottom: 2.25rem; }
+    @media (min-width: 600px) { .footer-top { grid-template-columns: 1.5fr 1fr 1fr; } }
+    .footer-brand-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: .08em;
+    }
+    .footer-brand-name span { color: var(--accent); }
+    .footer-brand p { font-size: .84rem; color: var(--text-2); margin-top: .65rem; line-height: 1.65; max-width: 280px; }
+    .footer-col-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: .08em; margin-bottom: .85rem; }
+    .footer-links { display: flex; flex-direction: column; gap: .55rem; }
+    .footer-links a { font-size: .84rem; color: var(--text-2); transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 1.4rem;
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: .72rem; color: var(--text-3); letter-spacing: .05em; }
+    .social-links { display: flex; gap: .75rem; }
+    .social-link {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border); display: grid; place-items: center;
+      font-size: .72rem; font-weight: 700; color: var(--text-2); transition: all .2s;
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ══════════════════════════════════════════════════════
+       LIGHTBOX / TOAST
+    ══════════════════════════════════════════════════════ */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.92); z-index: 300;
+      place-items: center; padding: 2rem;
+    }
+    .lightbox.open { display: grid; }
+    .lightbox-inner {
+      max-width: 560px; width: 100%;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 3rem 2rem; text-align: center; position: relative;
+    }
+    .lightbox-close {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 1.5rem; cursor: pointer; color: var(--text-2);
+      background: none; border: none; line-height: 1;
+    }
+    .lightbox-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; margin-bottom: .65rem;
+    }
+    .lightbox-sub { font-size: .88rem; color: var(--text-2); margin-bottom: 1.75rem; }
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 1.5rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 1rem 1.2rem; max-width: 290px; z-index: 200;
+      transform: translateY(110px); opacity: 0;
+      transition: all .4s .8s;
+    }
+    .toast.visible { transform: translateY(0); opacity: 1; }
+    .toast-text { font-size: .78rem; color: var(--text-2); line-height: 1.5; margin-bottom: .7rem; }
+    .toast-actions { display: flex; gap: .5rem; }
+    .toast-btn {
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; padding: .38rem .85rem; cursor: pointer; border: none;
+    }
+    .toast-accept { background: var(--accent); color: #fff; }
+    .toast-decline { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       TATTOO SIDE COLUMNS
+       Coloca imágenes de la carpeta de columnas aquí.
+       Orden izq: 1,3,5,7,2,4,6,8 luego duplicadas.
+       Orden der: 5,6,1,8,3,7,2,4 luego duplicadas.
+  ══════════════════════════════════════════════════════ -->
+  <div class="tattoo-col tattoo-col-left" aria-hidden="true">
+    <div class="col-track col-track-a">
+      <img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_03.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_05.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_07.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_10.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_12.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_03.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_05.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_07.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_10.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_12.jpg" alt="Tatuaje" loading="lazy">
+
+      <!-- duplicado para loop infinito -->
+      <img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_03.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_05.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_07.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_10.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_12.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_03.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_05.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_07.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_10.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_12.jpg" alt="Tatuaje" loading="lazy">
+
+    </div>
+    <div class="col-fade-bottom"></div>
+  </div>
+
+  <div class="tattoo-col tattoo-col-right" aria-hidden="true">
+    <div class="col-track col-track-b">
+      <img src="imagenes%20columna/col_02.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_04.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_06.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_08.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_11.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_02.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_04.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_06.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_08.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_11.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+
+      <!-- duplicado para loop infinito -->
+      <img src="imagenes%20columna/col_02.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_04.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_06.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_08.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_11.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_02.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_04.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_06.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_08.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_11.jpg" alt="Tatuaje" loading="lazy">
+<img src="imagenes%20columna/col_01.jpg" alt="Tatuaje" loading="lazy">
+
+    </div>
+    <div class="col-fade-bottom"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       TOP NAV
+  ══════════════════════════════════════════════════════ -->
+  <header class="topnav" role="banner">
+    <div class="topnav-inner">
+      <a href="#inicio" class="topnav-logo">GUS <span>TATTOO</span></a>
+
+      <nav class="topnav-links" aria-label="Navegación principal">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#galeria">Galería</a>
+        <a href="#artistas">Artistas</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="topnav-right">
+        <a href="#contacto" class="btn btn-primary topnav-cta">Reservar cita</a>
+        <button class="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú">
+    <button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Cerrar">×</button>
+    <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
+    <a href="#galeria"  onclick="toggleMenu()">Galería</a>
+    <a href="#artistas" onclick="toggleMenu()">Artistas</a>
+    <a href="#proceso"  onclick="toggleMenu()">Proceso</a>
+    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+    <a href="#contacto" class="btn btn-primary mm-cta" onclick="toggleMenu()">Reservar cita →</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-video-wrap" aria-hidden="true">
+      <video style="display:none" autoplay muted loop playsinline>
+        <source src="" type="video/mp4">
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Lugo, Galicia — Desde 2019</p>
+      <h1 class="heading-xl hero-headline">
+        Tu piel,<br>
+        <span class="line-accent">tu historia.</span>
+      </h1>
+      <p class="hero-sub">
+        Arte permanente que nace de lo que eres.<br>
+        Tu estudio de referencia en el corazón de Lugo, Galicia. Tatuajes 100% personalizados.
+      </p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary">Reservar mi cita →</a>
+        <a href="#galeria"  class="btn btn-outline">Ver el trabajo</a>
+      </div>
+      <div class="trust-bar" aria-label="Credenciales del estudio">
+        <div class="trust-bar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Estudio seguro y certificado
+        </div>
+        <div class="trust-bar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          Todos los estilos
+        </div>
+        <div class="trust-bar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Cita en menos de 24h
+        </div>
+        <div class="trust-bar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Centro de Lugo
+        </div>
+        <div class="trust-bar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          +5+ años — desde 2019
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+        <rect x="1" y="1" width="12" height="16" rx="6" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="7" y1="4.5" x2="7" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      scroll
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SOBRE NOSOTROS
+  ══════════════════════════════════════════════════════ -->
+  <section class="about-strip" id="nosotros">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <div class="about-img-placeholder">
+            <img
+              src="artist-photo.jpg"
+              alt="Gus Tattoo — logo del estudio"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-badge" aria-label="Desde 2019">
+            <small>desde</small>
+            2019
+          </div>
+        </div>
+        <div class="about-text reveal reveal-delay-1">
+          <p class="section-label">Sobre nosotros</p>
+          <div class="divider"></div>
+          <h2 class="heading-lg" style="margin-bottom:1.25rem">Arte con<br>propósito</h2>
+          <p>
+            <strong>Gus Tattoo</strong> Somos un estudio de tatuajes profesional en Lugo, Galicia. Nos especializamos en Neotradicional, Blackwork, Realismo y Fineline, creando piezas únicas para cada cliente.
+          </p>
+          <p>Cada tatuaje es una obra de arte pensada especialmente para ti. Trabajamos con materiales de la más alta calidad y seguimos los protocolos de higiene más estrictos.</p>
+          <ul class="about-list">
+            <li>Neotradicional &amp; Tradicional</li>
+<li>Blackwork &amp; Realismo</li>
+<li>Fineline &amp; Mini tattoos</li>
+<li>Diseños 100% personalizados</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       GALERÍA
+  ══════════════════════════════════════════════════════ -->
+  <section class="gallery-section" id="galeria">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Portfolio</p>
+        <div class="divider"></div>
+        <h2 class="heading-lg">Nuestro trabajo<br>habla por sí solo</h2>
+      </div>
+
+      <div class="gallery-filters reveal">
+        <button class="filter-btn active" data-filter="all">Todo</button>
+        <button class="filter-btn" data-filter="blackwork">Blackwork</button>
+        <button class="filter-btn" data-filter="fineline">Fine Line</button>
+        <button class="filter-btn" data-filter="color">Color</button>
+        <button class="filter-btn" data-filter="tradicional">Tradicional</button>
+      </div>
+
+      <div class="gallery-grid reveal">
+        <div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_01_likes43.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_02_likes30.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="color" tabindex="0" role="button" aria-label="Tatuaje Color">
+  <img src="imagenes%20trabajos/trabajo_03_likes20.jpg" alt="Tatuaje Color" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Color</span></div>
+</div>
+<div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_04_likes15.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="fineline" tabindex="0" role="button" aria-label="Tatuaje Fineline">
+  <img src="imagenes%20trabajos/trabajo_05_likes14.jpg" alt="Tatuaje Fineline" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Fineline</span></div>
+</div>
+<div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_06_likes13.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="blackwork" tabindex="0" role="button" aria-label="Tatuaje Blackwork">
+  <img src="imagenes%20trabajos/trabajo_07_likes13.jpg" alt="Tatuaje Blackwork" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Blackwork</span></div>
+</div>
+<div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_08_likes12.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="neotradicional" tabindex="0" role="button" aria-label="Tatuaje Neotradicional">
+  <img src="imagenes%20trabajos/trabajo_10_likes11.jpg" alt="Tatuaje Neotradicional" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Neotradicional</span></div>
+</div>
+<div class="gallery-item" data-category="color" tabindex="0" role="button" aria-label="Tatuaje Color">
+  <img src="imagenes%20trabajos/trabajo_11_likes9.jpg" alt="Tatuaje Color" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Color</span></div>
+</div>
+<div class="gallery-item" data-category="blackwork" tabindex="0" role="button" aria-label="Tatuaje Blackwork">
+  <img src="imagenes%20trabajos/trabajo_12_likes3.jpg" alt="Tatuaje Blackwork" loading="lazy" />
+  <div class="gallery-overlay"><span class="gallery-tag">Blackwork</span></div>
+</div>
+
+      </div>
+
+      <div class="gallery-cta reveal">
+        <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="btn btn-outline">
+          Ver más en Instagram →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       ARTISTAS
+  ══════════════════════════════════════════════════════ -->
+  <section class="artists-section" id="artistas">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">El equipo</p>
+        <div class="divider"></div>
+        <h2 class="heading-lg">Los artistas<br>detrás del arte</h2>
+      </div>
+      <div class="artists-grid">
+
+        <!-- Artista 1 -->
+        <article class="artist-card reveal">
+          <div class="artist-photo">
+            <img src="artist-photo.jpg" alt="Gus — artista Gus Tattoo" loading="lazy" />
+            <div class="artist-avatar-badge">
+              <img
+                class="artist-avatar-img"
+                src="artist-photo.jpg"
+                alt="Foto de perfil Gus"
+              />
+              <span class="artist-handle">@gustattoos</span>
+            </div>
+          </div>
+          <div class="artist-info">
+            <h3 class="artist-name">Gus</h3>
+            <p class="artist-specialty">Tatuador & Fundador</p>
+            <p class="artist-bio">Artista especializado en Neotradicional, Blackwork y Realismo. Cada pieza es un diseño único y personalizado para el cliente.</p>
+            <div class="artist-stats">
+              <div class="artist-stat">
+                <span class="stat-number">6.2K</span>
+                <span class="stat-label">Seguidores</span>
+              </div>
+              <div class="artist-stat">
+                <span class="stat-number">209</span>
+                <span class="stat-label">Publicaciones</span>
+              </div>
+            </div>
+            <div class="artist-tags">
+              Neotradicional / Blackwork / Realismo / Fineline
+            </div>
+          </div>
+        </article>
+
+        <!-- Artista 2 oculto — estudio individual -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       PROCESO
+  ══════════════════════════════════════════════════════ -->
+  <section class="process-section" id="proceso">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Cómo funciona</p>
+        <div class="divider"></div>
+        <h2 class="heading-lg">Del idea<br>a la piel</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <h3 class="process-step-title">Consulta</h3>
+          <p class="process-step-text">Cuéntanos tu idea por DM, formulario o pásate por el estudio en Lugo, Galicia. Sin compromiso ni presión.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <h3 class="process-step-title">Diseño</h3>
+          <p class="process-step-text">Tu artista crea un boceto personalizado. Lo refinamos juntos hasta que sea exactamente lo que quieres.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <h3 class="process-step-title">Sesión</h3>
+          <p class="process-step-text">Espacio limpio, música a tu gusto, ritmo cómodo. Tu bienestar durante la sesión es nuestra prioridad.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <h3 class="process-step-title">Cuidado</h3>
+          <p class="process-step-text">Te explicamos el proceso de cicatrización y resolvemos cualquier duda. Tu tatuaje es para siempre — lo cuidamos como tal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       TESTIMONIOS
+  ══════════════════════════════════════════════════════ -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Lo que dicen</p>
+        <div class="divider"></div>
+        <h2 class="heading-lg">Clientes que ya<br>llevan nuestra firma</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonial-text">"Un trabajo increíble, superó todas mis expectativas. El diseño fue completamente personalizado y quedó perfecto."</p>
+          <p class="testimonial-author">María García <span>Lugo · Tatuaje Neotradicional</span></p>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonial-text">"Profesionalidad y talento a partes iguales. El estudio es limpio, acogedor y el artista se toma el tiempo para crear exactamente lo que buscas."</p>
+          <p class="testimonial-author">Carlos López <span>Lugo · Blackwork</span></p>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
+          <p class="testimonial-text">"Ya llevo tres tatuajes aquí y siempre con el mismo resultado: perfecto. 100% recomendable para cualquier estilo."</p>
+          <p class="testimonial-author">Ana Martínez <span>Santiago · Fineline</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CONTACTO
+  ══════════════════════════════════════════════════════ -->
+  <section class="contact-section" id="contacto">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="section-label">Reservas</p>
+          <div class="divider"></div>
+          <h2 class="heading-lg" style="margin-bottom:1rem">Empieza tu<br>historia hoy</h2>
+          <p class="contact-info">
+            Rellena el formulario y te contactamos en menos de 24 horas. Cuéntanos tu idea,
+            tu estilo y cualquier referencia. No hace falta que sea perfecta — de eso nos encargamos nosotros.
+          </p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="detail-icon" aria-hidden="true">📍</div>
+              <div class="detail-text">
+                <strong>Dirección</strong>
+                <span>Tu estudio de referencia en el corazón de Lugo, Galicia. Tatuajes 100% personalizados.</span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="detail-icon" aria-hidden="true">📞</div>
+              <div class="detail-text">
+                <strong>Teléfono</strong>
+                <span><a href="tel:https://www.instagram.com/gustattoos/">Consulta por Instagram</a></span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="detail-icon" aria-hidden="true">📸</div>
+              <div class="detail-text">
+                <strong>Instagram</strong>
+                <span>@gustattoos</span>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="detail-icon" aria-hidden="true">⏰</div>
+              <div class="detail-text">
+                <strong>Horario</strong>
+                <span>Lun–Sáb: 10:00–20:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal reveal-delay-1">
+          <h3 class="form-title">Solicitar presupuesto</h3>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="estilo">Estilo de tatuaje</label>
+              <select id="estilo" name="estilo" required>
+                <option value="" disabled selected>Selecciona un estilo</option>
+                <option>Blackwork / Geométrico</option>
+                <option>Fine Line / Realismo</option>
+                <option>Color / New School</option>
+                <option>Tradicional / Old School</option>
+                <option>No lo sé aún</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="zona">Zona del cuerpo</label>
+              <input type="text" id="zona" name="zona" placeholder="Ej: Brazo, espalda, tobillo…" />
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Cuéntanos tu idea</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Describe tu tatuaje o compártenos referencias de Instagram…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">Enviar consulta →</button>
+            <p class="form-note">Te respondemos en menos de 24h · Sin compromiso</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-brand-name">GUS <span>TATTOO</span></p>
+          <p>Estudio de tatuajes en el centro de Lugo. Arte permanente para personas únicas. Todos los estilos, desde 2019.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Navegación</h4>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="#nosotros">Sobre nosotros</a>
+            <a href="#galeria">Galería</a>
+            <a href="#artistas">Artistas</a>
+            <a href="#proceso">Proceso</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Estilos</h4>
+          <ul role="list" style="display:flex;flex-direction:column;gap:.5rem">
+            <li style="font-size:.84rem;color:var(--text-2)">Blackwork</li>
+            <li style="font-size:.84rem;color:var(--text-2)">Fine Line</li>
+            <li style="font-size:.84rem;color:var(--text-2)">Realismo</li>
+            <li style="font-size:.84rem;color:var(--text-2)">Color · New School</li>
+            <li style="font-size:.84rem;color:var(--text-2)">Tradicional</li>
+            <li style="font-size:.84rem;color:var(--text-2)">Geométrico</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Gus Tattoo · Lugo, Galicia · Consulta por Instagram</p>
+        <div class="social-links" aria-label="Redes sociales">
+          <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram estudio">IG</a>
+          <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram Gus">IG2</a>
+          <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram Gus">IG3</a>
+          <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════
+       LIGHTBOX ÉXITO
+  ══════════════════════════════════════════════════════ -->
+  <div class="lightbox" id="successLightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">×</button>
+      <p style="font-size:2.8rem;margin-bottom:.75rem">🖤</p>
+      <h3 class="lightbox-title">¡Mensaje recibido!</h3>
+      <p class="lightbox-sub">Te contactamos en menos de 24 horas. Mientras tanto síguenos en Instagram para ver los últimos trabajos.</p>
+      <a href="https://www.instagram.com/gustattoos/" target="_blank" rel="noopener" class="btn btn-primary">Ver nuestro Instagram →</a>
+    </div>
+  </div>
+
+  <!-- Cookie toast -->
+  <div class="toast" id="cookieToast" role="alertdialog">
+    <p class="toast-text">Usamos cookies para mejorar tu experiencia. ¿Las aceptas?</p>
+    <div class="toast-actions">
+      <button class="toast-btn toast-accept" onclick="dismissToast()">Aceptar</button>
+      <button class="toast-btn toast-decline" onclick="dismissToast()">Solo esenciales</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       JS
+  ══════════════════════════════════════════════════════ -->
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('open');
+      document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+    }
+
+    setTimeout(() => {
+      if (!sessionStorage.getItem('cookieDismissed'))
+        document.getElementById('cookieToast').classList.add('visible');
+    }, 2200);
+    function dismissToast() {
+      document.getElementById('cookieToast').classList.remove('visible');
+      sessionStorage.setItem('cookieDismissed', '1');
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: .1, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          item.style.display = (f === 'all' || item.dataset.category === f) ? '' : 'none';
+        });
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('successLightbox').classList.add('open');
+      e.target.reset();
+    });
+    function closeLightbox() { document.getElementById('successLightbox').classList.remove('open'); }
+    document.getElementById('successLightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        const m = document.getElementById('mobileMenu');
+        if (m.classList.contains('open')) toggleMenu();
+      }
+    });
+  </script>
+</body>
+</html>
